@@ -21,35 +21,24 @@ public class GraMemory implements ActionListener
     JPanel iloscObrazow = new JPanel();
     JPanel startKoniec = new JPanel();
     JPanel trudnoscZasady = new JPanel();
-    JPanel rankingowy = new JPanel();
     JPanel wyswietlPoczatek = new JPanel();
     JPanel wyswietlKoniec = new JPanel();
+    JPanel testttt = new JPanel();
     JPanel wyswietlZasady = new JPanel();
-
-    //
-
-
-
     JPanel ranking = new JPanel();
-
-
-
-    //
 
     JButton zacznij = new JButton("Zacznij Gre");
     JButton wyjdz = new JButton("Wyjdz");
-    //
     JButton ranking1 = new JButton("Ranking");
     JButton zapisz = new JButton("Zapisz Wynik");
-    //
     JButton zasady = new JButton("Zasady Gry");
     JButton cofnij = new JButton("Cofnij");
     JButton[] obrazy = new JButton[20];
+
     ImageIcon question_1 = new ImageIcon("C:\\Users\\kowal\\Downloads\\question1.png");
     ImageIcon tester = new ImageIcon("C:\\Users\\kowal\\Downloads\\default.png");
     ImageIcon[] icons_buff={
 
-
             new ImageIcon(),
             new ImageIcon(),
             new ImageIcon(),
@@ -70,14 +59,9 @@ public class GraMemory implements ActionListener
             new ImageIcon(),
             new ImageIcon(),
             new ImageIcon(),
-
-
-
     };
 
-
     ImageIcon[] icons = {
-
             new ImageIcon("C:\\Users\\kowal\\Downloads\\text1.png"),
             new ImageIcon("C:\\Users\\kowal\\Downloads\\text2.png"),
             new ImageIcon("C:\\Users\\kowal\\Downloads\\text3.png"),
@@ -89,8 +73,6 @@ public class GraMemory implements ActionListener
             new ImageIcon("C:\\Users\\kowal\\Downloads\\text9.png"),
             new ImageIcon("C:\\Users\\kowal\\Downloads\\text10.png")
     };
-
-
 
     private boolean czyszczenie = false;
     int poziom = 0;
@@ -108,27 +90,23 @@ public class GraMemory implements ActionListener
     public GraMemory()
     {
         graMemory.setSize(1000,600);
-        graMemory.setLocation(700,400);
+        graMemory.setLocation(450,200);
         graMemory.setLayout(new BorderLayout());
         graMemory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         wyswietlPoczatek.setLayout(new BorderLayout());
         iloscObrazow.setLayout(new FlowLayout(FlowLayout.CENTER));
         startKoniec.setLayout(new FlowLayout(FlowLayout.CENTER));
-        //
         ranking.setLayout(new FlowLayout(FlowLayout.CENTER));
-        //
         trudnoscZasady.setLayout(new FlowLayout(FlowLayout.CENTER));
         wyswietlPoczatek.add(iloscObrazow, BorderLayout.NORTH);
         wyswietlPoczatek.add(trudnoscZasady, BorderLayout.CENTER);
         wyswietlPoczatek.add(startKoniec, BorderLayout.SOUTH);
-        //
         sp.setBounds(10,60,780,500);
         sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ranked.setEditable(false);
         zasadyGry.setEditable(false);
-        //
         JLabel label = new JLabel("Wprowadz ilosc obrazow do dopasowania (1-10):");
-        iloscObrazow.add(new JLabel(new ImageIcon("C:\\Users\\kowal\\OneDrive\\Pulpit\\Java\\Memory\\src\\com\\company\\1.png")), BorderLayout.NORTH);
+        iloscObrazow.add(new JLabel(new ImageIcon("C:\\Users\\kowal\\OneDrive\\Pulpit\\Java\\Memory\\src\\com\\company\\3.png")), BorderLayout.NORTH);
         trudnoscZasady.add(label, BorderLayout.NORTH);
         trudnoscZasady.add(poleTekstowe, BorderLayout.NORTH);
         startKoniec.add(zasady, BorderLayout.SOUTH);
@@ -137,13 +115,14 @@ public class GraMemory implements ActionListener
         zacznij.addActionListener(this);
         zacznij.setEnabled(true);
         startKoniec.add(zacznij);
+
         wyjdz.addActionListener(this);
         wyjdz.setEnabled(true);
-        //
+
         ranking1.addActionListener(this);
         ranking1.setEnabled(true);
         startKoniec.add(ranking1);
-        //
+
         startKoniec.add(wyjdz);
         zasady.addActionListener(this);
         zasady.setEnabled(true);
@@ -218,27 +197,20 @@ public class GraMemory implements ActionListener
     public void zwyciezca()
     {
         resetEkranuGlownego();
-        System.out.println("test1");
         wyswietlPoczatek.remove(plansza);
-        System.out.println("test2");
-        wyswietlPoczatek.add(wyswietlKoniec, BorderLayout.NORTH);
-        System.out.println("test3");
-        wyswietlKoniec.add(new TextField("Wygrana"), BorderLayout.NORTH);
-        System.out.println("test4");
-        wyswietlKoniec.add(new TextField("Błędy: " + wynik), BorderLayout.NORTH);
-        //
+        wyswietlPoczatek.add(wyswietlKoniec, BorderLayout.CENTER);
+        JTextField bledy = new JTextField("Bledy: " + wynik);
+        bledy.setEditable(false);
+        wyswietlKoniec.add(bledy, BorderLayout.NORTH);
         wyswietlKoniec.add(pseudonim, BorderLayout.SOUTH);
         zapisz.addActionListener(this);
         zapisz.setEnabled(true);
         wyswietlKoniec.add(zapisz);
-        //
-        System.out.println("test5");
         wyswietlKoniec.add(cofnij);
-        System.out.println("test6");
         cofnij.setEnabled(true);
-        System.out.println("test7");
         cofnij.addActionListener(this);
-        System.out.println("test8");
+        wyswietlKoniec.add(testttt,BorderLayout.CENTER);
+        testttt.add(new JLabel(new ImageIcon("C:\\Users\\kowal\\OneDrive\\Pulpit\\Java\\Memory\\src\\com\\company\\4.png")), BorderLayout.SOUTH);
     }
 
     public void rozpocznijGre(int x)
@@ -338,7 +310,7 @@ public class GraMemory implements ActionListener
             wyswietlZasady.setLayout(new BorderLayout());
             wyswietlZasady.add(jPanel1, BorderLayout.NORTH);
             wyswietlZasady.add(jPanel2, BorderLayout.SOUTH);
-            ranked.setText(streamInput());
+            ranked.setText(sort());
             jPanel1.add(sp);
             jPanel2.add(cofnij);
             cofnij.addActionListener(this);
@@ -347,11 +319,19 @@ public class GraMemory implements ActionListener
 
         if(klikniecie == zapisz)
         {
-            streamOutput();
-            streamInput();
-            graMemory.dispose();
-            powrotDoMenu();
-            resetEkranuGlownego();
+            if(pseudonim.getText().equals("Wpisz pseudonim"))
+                {
+                    JOptionPane.showMessageDialog(graMemory, "Nie podano pseudonimu!");
+                    System.out.println("nie wpisano");
+                }
+            else
+            {
+                streamOutput();
+                streamInput();
+                graMemory.dispose();
+                powrotDoMenu();
+                resetEkranuGlownego();
+            }
         }
 
         if(klikniecie == cofnij)
@@ -397,7 +377,7 @@ public class GraMemory implements ActionListener
 
     public void streamOutput()
     {
-        String s = pseudonim.getText() + " Wynik: " + wynik + "\n" + "\n";
+        String s = pseudonim.getText() + " Bledy: " + wynik + "\n" + "\n";
         String nazwa = "highscores.txt";
         try {
             File myObj = new File(nazwa);
@@ -427,11 +407,12 @@ public class GraMemory implements ActionListener
         }
     }
 
-    public String streamInput()
+    public static String streamInput()
     {
         String nazwa = "highscores.txt";
         StringBuilder buffer = new StringBuilder();
-        try {
+        try
+        {
             FileInputStream fin=new FileInputStream(nazwa);
             int i;
             while((i=fin.read())!=-1)
@@ -446,8 +427,39 @@ public class GraMemory implements ActionListener
         return buffer.toString();
     }
 
+   public String sort()
+    {
+        String buf;
+        String[] lines = streamInput().split("\n" + "\n");
+
+        for(int i=0;i<lines.length;i++)
+        {
+            String l = lines[i].substring(lines[i].indexOf("Bledy:")+7);
+
+            for(int k=0;k<lines.length;k++)
+            {
+                String l1 = lines[k].substring(lines[k].indexOf("Bledy:")+7);
+                if(Integer.parseInt(l1)>Integer.parseInt(l))
+                {
+                    buf=lines[k];
+                    lines[k]=lines[i];
+                    lines[i]=buf;
+                }
+            }
+        }
+        buf="";
+        int counter=1;
+        for (int i=0;i<lines.length;i++)
+        {
+            buf=buf + counter + ". " + lines[i] + "\n" + "\n";
+            counter++;
+        }
+            return buf;
+    }
+
     public static void main(String[] args)
     {
         new GraMemory();
+        //sort();
     }
 }
