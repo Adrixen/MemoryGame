@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public
 class GraMemory implements ActionListener
 {
+    File high = new File("highscores.txt");
     File MainImage = new File("MainImage.png");
     File Win = new File("Win.png");
     File QuestionMark = new File("question1.png");
@@ -330,22 +331,29 @@ class GraMemory implements ActionListener
 
         if ( klikniecie == ranking1 )
         {
-            resetEkranuGlownego ( );
+            if(high.exists ())
+            {
+                resetEkranuGlownego ( );
 
-            wyswietlPoczatek.add ( wyswietlZasady , BorderLayout.NORTH );
+                wyswietlPoczatek.add ( wyswietlZasady , BorderLayout.NORTH );
 
-            JPanel jPanel1 = new JPanel ( );
-            jPanel1.setLayout ( new FlowLayout ( FlowLayout.CENTER ) );
-            JPanel jPanel2 = new JPanel ( );
-            jPanel2.setLayout ( new FlowLayout ( FlowLayout.CENTER ) );
-            wyswietlZasady.setLayout ( new BorderLayout ( ) );
-            wyswietlZasady.add ( jPanel1 , BorderLayout.NORTH );
-            wyswietlZasady.add ( jPanel2 , BorderLayout.SOUTH );
-            ranked.setText ( sort ( ) );
-            jPanel1.add ( sp );
-            jPanel2.add ( cofnij );
-            cofnij.addActionListener ( this );
-            cofnij.setEnabled ( true );
+                JPanel jPanel1 = new JPanel ( );
+                jPanel1.setLayout ( new FlowLayout ( FlowLayout.CENTER ) );
+                JPanel jPanel2 = new JPanel ( );
+                jPanel2.setLayout ( new FlowLayout ( FlowLayout.CENTER ) );
+                wyswietlZasady.setLayout ( new BorderLayout ( ) );
+                wyswietlZasady.add ( jPanel1 , BorderLayout.NORTH );
+                wyswietlZasady.add ( jPanel2 , BorderLayout.SOUTH );
+                ranked.setText ( sort ( ) );
+                jPanel1.add ( sp );
+                jPanel2.add ( cofnij );
+                cofnij.addActionListener ( this );
+                cofnij.setEnabled ( true );
+            }
+            else
+            {
+                JOptionPane.showMessageDialog ( graMemory , "Ranking jest pusty, prosze zagrac" );
+            }
         }
 
         if ( klikniecie == zapisz )
