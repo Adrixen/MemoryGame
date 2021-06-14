@@ -1,5 +1,11 @@
 package com.company;
 
+/**
+ * Memory Game written in java using Swing library.
+ *
+ * @authors Adrian Kowalski, Kamil Adas, Patryk Duda.
+ */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,6 +21,14 @@ import javax.swing.JPanel;
 public
 class GraMemory implements ActionListener
 {
+    /**
+     * Main class for the game.
+     * @param wynik Wynik koncowy.
+     * @param poziom Level in the game (number of pairs of images).
+     * In this class there are also defined files with their absolute paths for ease of use.
+     * Swing objects are also defined here e.g. JFrame, JPanels, JButtons.. etc..
+     */
+
     File high = new File("highscores.txt");
     File MainImage = new File("MainImage.png");
     File Win = new File("Win.png");
@@ -150,11 +164,19 @@ class GraMemory implements ActionListener
         graMemory.setVisible ( true );
     }
 
+    /**
+     * This method is for resetting the game. (Back to Menu)
+     */
+
     public
     void powrotDoMenu ( )
     {
         new GraMemory ( );
     }
+
+    /**
+     *This method is for refreshing the game window.
+     */
 
     public
     void resetEkranuGlownego ( )
@@ -166,6 +188,10 @@ class GraMemory implements ActionListener
         wyswietlPoczatek.repaint ( );
     }
 
+    /**
+     *This method is for creating a board on which the images are displayed.
+     */
+
     public
     void stworzPlansze ( )
     {
@@ -175,6 +201,10 @@ class GraMemory implements ActionListener
         plansza.setBackground ( Color.white );
         plansza.requestFocus ( );
     }
+
+    /**
+     *This method is for hiding the image.
+     */
 
     public
     void ukryjPole ( int x )
@@ -186,6 +216,10 @@ class GraMemory implements ActionListener
         }
         pokazane = false;
     }
+
+    /**
+     *This method checks if it is the end of the game. If it is the end of the game it proceeds to the zwyciezca() function.
+     */
 
     public
     void sprawdzCzyKoniec ( )
@@ -200,6 +234,9 @@ class GraMemory implements ActionListener
         zwyciezca ( );
     }
 
+    /**
+     *This method is for placing images randomly.
+     */
 
     public
     void zamienMiejsca ( int i )
@@ -217,6 +254,11 @@ class GraMemory implements ActionListener
             }
         }
     }
+
+    /**
+     * This method is called when it is the end of the game.
+     * It shows the player how many mistakes he made and displays end of game window objects.
+     */
 
     public
     void zwyciezca ( )
@@ -237,6 +279,12 @@ class GraMemory implements ActionListener
         wyswietlKoniec.add ( testttt , BorderLayout.CENTER );
         testttt.add ( new JLabel ( new ImageIcon ( Win.getAbsolutePath() ) ) , BorderLayout.SOUTH );
     }
+
+    /**
+     *This method starts the game.
+     *It has parameter x which is the number of the level chosen by the player.
+     *When "Zacznij Gre" button is clicked this function is called.
+     */
 
     public
     void rozpocznijGre ( int x )
@@ -272,6 +320,11 @@ class GraMemory implements ActionListener
         stworzPlansze ( );
     }
 
+    /**
+     *This method is for registering events such as mouse clicks so that the programme knows where the user clicked.
+     *There are multiple if conditions inside of this method. If certain condition is satisfied (when player clicks on a certain button)
+     *other methods are called as well.
+     */
 
     public
     void actionPerformed ( ActionEvent click )
@@ -413,6 +466,10 @@ class GraMemory implements ActionListener
         }
     }
 
+    /**
+     *This method creates a new text file and writes to it the name of the player and his score at the end of the game.
+     */
+
     public
     void streamOutput ( )
     {
@@ -451,6 +508,10 @@ class GraMemory implements ActionListener
         }
     }
 
+    /**
+     *This method reads from the text file previously created in streamOutput function.
+     */
+
     public static
     String streamInput ( )
     {
@@ -472,6 +533,10 @@ class GraMemory implements ActionListener
         }
         return buffer.toString ( );
     }
+
+    /**
+     *This method sorts players' scores and returns sorted scores.
+     */
 
     public
     String sort ( )
@@ -503,6 +568,10 @@ class GraMemory implements ActionListener
         }
         return buf;
     }
+
+    /**
+     *Main Method used to start the programme.
+     */
 
     public static
     void main ( String[] args )
